@@ -36,4 +36,7 @@ orderSchema.pre('save', function (next) {
     next();
 });
 
-module.exports = mongoose.model('Order', orderSchema);
+const OrderModel = mongoose.model('Order', orderSchema);
+module.exports ={
+    OrderModel
+}

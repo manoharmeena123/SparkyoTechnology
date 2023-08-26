@@ -65,7 +65,7 @@ const { orderRouter } = require("./routes/order.route")
 
 app.get("/", (req, res) => {
   logger.info("Request to / route");
-  console.log(req.cookies);
+  // console.log(req.cookies);
   res.json("Welcome");
 });
 

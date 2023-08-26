@@ -58,7 +58,7 @@ const login = async (req, res) => {
                         expiresIn: "5h",
                     });
 
-                    res.cookie("token", token, { httpOnly: true, maxAge: 5 * 60 * 60 * 1000 }); // Set maxAge in milliseconds (5 hours)
+                    res.cookie("token", token, { httpOnly: true, maxAge: 5 * 60 * 60 * 1000 }); 
 
                     res.json({
                         msg: "Login Successfully",
