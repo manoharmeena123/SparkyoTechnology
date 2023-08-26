@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
@@ -29,14 +28,38 @@ const orderSchema = new mongoose.Schema({
     }
 });
 
-orderSchema.pre('save', function (next) {
+orderSchema.pre('save', async function (next) {
     const order = this;
-    // Incremental order number logic goes here
+
+    // Incremental order number logic
+    try {
+        const lastOrder = await OrderModel.findOne({}, {}, { sort: { 'orderNumber': -1 } });
+        if (lastOrder) {
+            const lastOrderNumber = parseInt(lastOrder.orderNumber, 10);
+            order.orderNumber = (lastOrderNumber + 1).toString().padStart(4, '0');
+        } else {
+            order.orderNumber = '0001';
+        }
+    } catch (error) {
+        return next(error);
+    }
+
     // Assign price from item
+    try {
+        const item = await ItemModel.findById(order.itemId);
+        if (!item) {
+            throw new Error("Item not found");
+        }
+        order.price = item.price;
+    } catch (error) {
+        return next(error);
+    }
+
     next();
 });
 
 const OrderModel = mongoose.model('Order', orderSchema);
-module.exports ={
+
+module.exports = {
     OrderModel
-}
+};

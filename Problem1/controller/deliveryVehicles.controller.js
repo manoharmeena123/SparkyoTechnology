@@ -1,70 +1,53 @@
-const express = require("express")
-const deliveryRouter = express.Router()
-const { deliveryModel } = require("../models/deliveryVehicles.model")
+const { DeliveryVehicleModel } = require("../models/deliveryVehicles.model");
 
 
-//Get ALL ==============================================>
 
+//Get All=============================================================>
 const deliveryGet = async (req, res) => {
     try {
-        const deliverys = await deliveryModel.find()
-        res.json(deliverys)
-
+        const deliveryVehicles = await DeliveryVehicleModel.find();
+        res.json(deliveryVehicles);
     } catch (error) {
-        res.json(error)
+        res.status(500).json({ error: "Internal server error" });
     }
+};
 
-}
 
-
-//POST=============================================>
+//Post  =============================================================>
 const deliveryPost = async (req, res) => {
-    const payload = req.body
     try {
-        const data = new deliveryModel(payload)
-        await data.save()
-        res.send("Data Posted Successfully")
+        const newDeliveryVehicle = new DeliveryVehicleModel(req.body);
+        await newDeliveryVehicle.save();
+        res.status(201).json({ message: "Delivery vehicle created successfully" });
     } catch (error) {
-        console.log(error)
-        res.send("error in Post")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//PATCH=====================================================>
+//Update  =============================================================>
 const deliveryUpdate = async (req, res) => {
-    const id = req.params.id
-    const payload = req.body
-    const delivery = await deliveryModel.findOne({ _id: id })
+    const deliveryId = req.params.id;
     try {
-        const data = await deliveryModel.findByIdAndUpdate({ _id: delivery }, payload)
-        res.send("Data Updated Successfully")
+        await DeliveryVehicleModel.findByIdAndUpdate(deliveryId, req.body);
+        res.json({ message: "Delivery vehicle updated successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in patch")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
-
-//DELETE====================================================>
+};
+//Delete  =============================================================>
 const deliveryDelete = async (req, res) => {
-    const id = req.params.id
-    const delivery = await deliveryModel.findOne({ _id: id })
+    const deliveryId = req.params.id;
     try {
-        await deliveryModel.findByIdAndDelete({ _id: delivery })
-        res.send({ "msg": "Deleted successfully" })
+        await DeliveryVehicleModel.findByIdAndDelete(deliveryId);
+        res.json({ message: "Delivery vehicle deleted successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
+        res.status(500).json({ error: "Internal server error" });
     }
-
-
-}
-
-
+};
 
 module.exports = {
-   deliveryGet,
-   deliveryPost, 
-   deliveryUpdate, 
-   deliveryDelete
-
-}
+    deliveryGet,
+    deliveryPost,
+    deliveryUpdate,
+    deliveryDelete
+};

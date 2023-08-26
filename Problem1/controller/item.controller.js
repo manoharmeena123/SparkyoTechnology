@@ -1,68 +1,54 @@
-const express = require("express")
-const itemRouter = express.Router()
-const { ItemModel } = require("../models/item.model")
+const { ItemModel } = require("../models/item.model");
 
 
+
+//Get All=============================================================>
 const itemGet = async (req, res) => {
     try {
-        const items = await ItemModel.find()
-        res.json(items)
-
+        const items = await ItemModel.find();
+        res.json(items);
     } catch (error) {
-        res.json(error)
+        res.status(500).json({ error: "Internal server error" });
     }
+};
 
-}
 
-
-//POST=============================================>
+//Post  =============================================================>
 const itemPost = async (req, res) => {
-    const payload = req.body
     try {
-        const data = new ItemModel(payload)
-        await data.save()
-        res.send("Data Posted Successfully")
+        const newItem = new ItemModel(req.body);
+        await newItem.save();
+        res.status(201).json({ message: "Item created successfully" });
     } catch (error) {
-        console.log(error)
-        res.send("error in Post")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//PATCH=====================================================>
+//Update  =============================================================>
 const itemUpdate = async (req, res) => {
-    const itemId = req.params.itemId
-    const payload = req.body
-    const item = await ItemModel.findOne({ _id: itemId })
+    const itemId = req.params.itemId;
     try {
-        const data = await ItemModel.findByIdAndUpdate({ _id: item }, payload)
-        res.send("Data Updated Successfully")
+        await ItemModel.findByIdAndUpdate(itemId, req.body);
+        res.json({ message: "Item updated successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in patch")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//DELETE====================================================>
+//Delete  =============================================================>
 const itemDelete = async (req, res) => {
-    const itemId = req.params.itemId
-    const item = await ItemModel.findOne({ _id: itemId })
+    const itemId = req.params.itemId;
     try {
-        await ItemModel.findByIdAndDelete({ _id: item })
-        res.send({ "msg": "Deleted successfully" })
+        await ItemModel.findByIdAndDelete(itemId);
+        res.json({ message: "Item deleted successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
+        res.status(500).json({ error: "Internal server error" });
     }
-
-
-}
-
-
+};
 
 module.exports = {
     itemGet,
     itemPost,
     itemUpdate,
-    itemDelete,
-
-}
+    itemDelete
+};

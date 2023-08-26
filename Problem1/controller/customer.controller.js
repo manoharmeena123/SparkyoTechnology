@@ -1,70 +1,57 @@
-const express = require("express")
-const customerRouter = express.Router()
-const { customerModel } = require("../models/item.model")
+const { CustomerModel } = require("../models/customer.model");
 
 
-//Get ALL ==============================================>
-
+//Get All=============================================================>
 const customerGet = async (req, res) => {
     try {
-        const customers = await customerModel.find()
-        res.json(customers)
-
+        const customers = await CustomerModel.find();
+        res.json(customers);
     } catch (error) {
-        res.json(error)
+        res.status(500).json({ error: "Internal server error" });
     }
+};
 
-}
 
 
-//POST=============================================>
+
+//Post  =============================================================>
 const customerPost = async (req, res) => {
-    const payload = req.body
     try {
-        const data = new customerModel(payload)
-        await data.save()
-        res.send("Data Posted Successfully")
+        const newCustomer = new CustomerModel(req.body);
+        await newCustomer.save();
+        res.status(201).json({ message: "Customer created successfully" });
     } catch (error) {
-        console.log(error)
-        res.send("error in Post")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//PATCH=====================================================>
+
+
+//Update  =============================================================>
 const customerUpdate = async (req, res) => {
-    const id = req.params.id
-    const payload = req.body
-    const item = await customerModel.findOne({ _id: id })
+    const customerId = req.params.id;
     try {
-        const data = await customerModel.findByIdAndUpdate({ _id: item }, payload)
-        res.send("Data Updated Successfully")
+        await CustomerModel.findByIdAndUpdate(customerId, req.body);
+        res.json({ message: "Customer updated successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in patch")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//DELETE====================================================>
+//Delete  =============================================================>
 const customerDelete = async (req, res) => {
-    const id = req.params.id
-    const item = await customerModel.findOne({ _id: id })
+    const customerId = req.params.id;
     try {
-        await customerModel.findByIdAndDelete({ _id: item })
-        res.send({ "msg": "Deleted successfully" })
+        await CustomerModel.findByIdAndDelete(customerId);
+        res.json({ message: "Customer deleted successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
+        res.status(500).json({ error: "Internal server error" });
     }
-
-
-}
-
-
+};
 
 module.exports = {
-   customerGet,
-   customerPost, 
-   customerUpdate, 
-   customerDelete
-
-}
+    customerGet,
+    customerPost,
+    customerUpdate,
+    customerDelete
+};

@@ -1,22 +1,4 @@
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:16:42.987Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:16:42.989Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:30:27.853Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:30:27.858Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:31:54.826Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:31:54.829Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:37:06.910Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:37:06.912Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:38:32.314Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:38:32.316Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:38:39.624Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:38:39.629Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:38:48.115Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:38:48.117Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:38:50.794Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:38:50.796Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:38:56.928Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:38:56.929Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:39:06.039Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:39:06.041Z"}
-{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T16:39:22.037Z"}
-{"level":"info","message":"Server on 8000","timestamp":"2023-08-26T16:39:22.039Z"}
+{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T17:21:43.640Z"}
+{"level":"info","message":"Server running on port 8000","timestamp":"2023-08-26T17:21:43.642Z"}
+{"level":"info","message":"Connected to DB","timestamp":"2023-08-26T17:21:48.786Z"}
+{"level":"info","message":"Server running on port 8000","timestamp":"2023-08-26T17:21:48.811Z"}

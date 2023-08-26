@@ -1,5 +1,3 @@
-
-
 const mongoose = require('mongoose');
 
 const deliveryVehicleSchema = new mongoose.Schema({
@@ -17,14 +15,15 @@ const deliveryVehicleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    activeOrdersCount: { type: Number, 
-        default: 0, 
-        max: 2 
+    activeOrdersCount: {
+        type: Number,
+        default: 0,
+        max: 2
     }
 });
 
-const DeliveryVehicleModel= mongoose.model('DeliveryVehicle', deliveryVehicleSchema);
+const DeliveryVehicleModel = mongoose.model('DeliveryVehicle', deliveryVehicleSchema);
 
-module.exports ={
+module.exports = {
     DeliveryVehicleModel
-}
+};

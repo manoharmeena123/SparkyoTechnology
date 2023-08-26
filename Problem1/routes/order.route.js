@@ -1,18 +1,13 @@
 const express = require("express");
-const app = express();
-const orderRouter = express.Router();
 const { orderGet, orderPost, orderUpdate, orderDelete } = require("../controller/order.controller");
 
-app.use(express.json());
-
-
-//Router=========================================>
+const orderRouter = express.Router();
 
 orderRouter.get("/", orderGet);
 orderRouter.post("/create", orderPost);
-orderRouter.patch("update/:id", orderUpdate);
-orderRouter.delete("delete/:id", orderDelete);
+orderRouter.patch("/:id", orderUpdate);
+orderRouter.delete("/:id", orderDelete);
 
 module.exports = {
     orderRouter
-}
+};

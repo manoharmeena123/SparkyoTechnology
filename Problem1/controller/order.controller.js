@@ -1,69 +1,54 @@
-const express = require("express")
-const { OrderModel } = require("../models/order.model")
+const { OrderModel } = require("../models/order.model");
 
 
-//Get ALL ==============================================>
 
+//Get All=============================================================>
 const orderGet = async (req, res) => {
     try {
-        const orders = await OrderModel.find()
-        res.json(orders)
-
+        const orders = await OrderModel.find();
+        res.json(orders);
     } catch (error) {
-        res.json(error)
+        res.status(500).json({ error: "Internal server error" });
     }
+};
 
-}
 
-
-//POST=============================================>
+//Post  =============================================================>
 const orderPost = async (req, res) => {
-    const payload = req.body
     try {
-        const data = new OrderModel(payload)
-        await data.save()
-        res.send("Data Posted Successfully")
+        const newOrder = new OrderModel(req.body);
+        await newOrder.save();
+        res.status(201).json({ message: "Order created successfully" });
     } catch (error) {
-        console.log(error)
-        res.send("error in Post")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//PATCH=====================================================>
+//Update  =============================================================>
 const orderUpdate = async (req, res) => {
-    const id = req.params.id
-    const payload = req.body
-    const order = await OrderModel.findOne({ _id: id })
+    const orderId = req.params.id;
     try {
-        const data = await OrderModel.findByIdAndUpdate({ _id: order }, payload)
-        res.send("Data Updated Successfully")
+        await OrderModel.findByIdAndUpdate(orderId, req.body);
+        res.json({ message: "Order updated successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in patch")
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
-//DELETE====================================================>
+//Delete  =============================================================>
 const orderDelete = async (req, res) => {
-    const id = req.params.id
-    const order = await OrderModel.findOne({ _id: id })
+    const orderId = req.params.id;
     try {
-        await OrderModel.findByIdAndDelete({ _id: order })
-        res.send({ "msg": "Deleted successfully" })
+        await OrderModel.findByIdAndDelete(orderId);
+        res.json({ message: "Order deleted successfully" });
     } catch (error) {
-        console.log(Error)
-        res.send("error in Delete")
+        res.status(500).json({ error: "Internal server error" });
     }
-
-
-}
-
-
+};
 
 module.exports = {
-   orderGet,
-   orderPost, 
-   orderUpdate, 
-   orderDelete
-
-}
+    orderGet,
+    orderPost,
+    orderUpdate,
+    orderDelete
+};

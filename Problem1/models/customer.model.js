@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const customerSchema = new mongoose.Schema({
@@ -8,6 +7,6 @@ const customerSchema = new mongoose.Schema({
 
 const CustomerModel = mongoose.model('Customer', customerSchema);
 
-module.exports ={
+module.exports = {
     CustomerModel
-}
+};
