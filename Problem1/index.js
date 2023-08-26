@@ -57,3 +57,6 @@ app.listen(PORT, async () => {
     }
     logger.info(`Server running on port ${PORT}`);
 });
+
+
+module.exports = app;

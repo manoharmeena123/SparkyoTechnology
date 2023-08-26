@@ -5,8 +5,8 @@ const itemRouter = express.Router();
 
 itemRouter.get("/", itemGet);
 itemRouter.post("/create", itemPost);
-itemRouter.patch("/:itemId", itemUpdate);
-itemRouter.delete("/:itemId", itemDelete);
+itemRouter.put("/update/:itemId", itemUpdate);
+itemRouter.delete("/delete/:itemId", itemDelete);
 
 module.exports = {
     itemRouter
