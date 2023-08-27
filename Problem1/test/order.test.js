@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 const request = require('supertest');
-const app = require('../index'); // Import your Express app instance
+const app = require('../index'); 
 
 describe('Orders API', () => {
     it('should get a list of orders', (done) => {
