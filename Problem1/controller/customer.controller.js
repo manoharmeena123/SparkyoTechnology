@@ -28,10 +28,11 @@ const customerPost = async (req, res) => {
 
 
 //Update  =============================================================>
-const customerUpdate = async (req, res) => {
-    const customerId = req.params.id;
+const customerUpdate = async(req, res) => {
+    const Id = req.params.Id;
+    const payload = req.body
     try {
-        await CustomerModel.findByIdAndUpdate(customerId, req.body);
+        await CustomerModel.findByIdAndUpdate({ _id:Id }, payload);
         res.json({ message: "Customer updated successfully" });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
@@ -40,9 +41,9 @@ const customerUpdate = async (req, res) => {
 
 //Delete  =============================================================>
 const customerDelete = async (req, res) => {
-    const customerId = req.params.id;
+    const Id = req.params.Id;
     try {
-        await CustomerModel.findByIdAndDelete(customerId);
+        await CustomerModel.findByIdAndDelete({_id : Id});
         res.json({ message: "Customer deleted successfully" });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });

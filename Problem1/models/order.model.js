@@ -26,6 +26,11 @@ const orderSchema = new mongoose.Schema({
     isDelivered: {
         type: Boolean,
         default: false
+    },
+    invoice: {
+        customerName: String,
+        itemName: String,
+        price: Number
     }
 });
 
@@ -54,6 +59,21 @@ orderSchema.pre('save', async function (next) {
         order.price = item.price;
     } catch (error) {
         return next(error);
+    }
+
+    // Invoicing logic
+    if (order.isDelivered) {
+        const customer = await CustomerModel.findById(order.customerId);
+
+        if (!customer) {
+            return next(new Error("Customer not found"));
+        }
+        const invoice = {
+            customerName: customer.name,
+            itemName: item.name, 
+            price: order.price
+        };
+        order.invoice = invoice;
     }
 
     next();

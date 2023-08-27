@@ -28,9 +28,9 @@ const itemPost = async (req, res) => {
 const itemUpdate = async (req, res) => {
     const itemId = req.params.itemId;
     const payload = req.body
-    const item = await ItemModel.findOne({ _id: itemId })
+    // const item = await ItemModel.findOne({ _id: itemId })
     try {
-        await ItemModel.findByIdAndUpdate({ _id: item }, payload);
+        await ItemModel.findByIdAndUpdate({ _id: itemId }, payload);
         res.json({ message: "Item updated successfully" });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });

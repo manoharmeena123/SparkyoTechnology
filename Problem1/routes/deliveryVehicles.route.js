@@ -7,8 +7,8 @@ const deliveryRouter = express.Router();
 
 deliveryRouter.get("/", deliveryGet);
 deliveryRouter.post("/create", deliveryPost);
-deliveryRouter.patch("/:id", deliveryUpdate);
-deliveryRouter.delete("/:id", deliveryDelete);
+deliveryRouter.patch("/update/:id", deliveryUpdate);
+deliveryRouter.delete("/delete/:id", deliveryDelete);
 
 module.exports = {
     deliveryRouter
